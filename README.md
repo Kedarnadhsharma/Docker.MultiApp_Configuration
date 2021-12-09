@@ -1,4 +1,4 @@
-# Multi Container Application orchestration using Docker Compose.
+# Multi Container Application orchestration using Docker Compose
 Traditionally most of the Enterprise applications are divided into different layers for abstraction. We generally see the following tiers in a traditional application.
 1. Web/Presentation Layer - This is typically the front end developed using Angular/React/MVC using Razor etc
 2. API/Business Layer -     This is where the business logic of the application resides and also involves calling a webservice/database layer.
@@ -40,6 +40,36 @@ Considering, the heterogeneous nature of the different tiers, each tier will be 
 6. The final result from the UI is given below. 
 
 ![image](https://user-images.githubusercontent.com/50028950/145347813-fa163ee3-dec9-49c8-b951-00af8d70069f.png)
+
+# Adding Container support 
+Now that our application is up and running we will add Docker Support for the application.
+1. Right click the Web Project and Select Add -> Container Orchestrator Support and Select Docker Compose as the Container Orchestrator and Linux as the Target OS.2
+
+![image](https://user-images.githubusercontent.com/50028950/145350338-f7ddadfc-efaa-4cf1-9eb4-52582817ce8d.png)
+
+2. This will add the Docker Compose file and the dockerignore files to the solution as shown below. Currently the dockercompose file has only one service for the API. 
+
+![image](https://user-images.githubusercontent.com/50028950/145350809-5cd6930d-d2f6-4a56-8614-111520161bf7.png)
+
+3. Additionally VS 2019 has added a Docker file to the API project named "Dockerfile" and this will be used by the Docker Compose file while building.
+
+![image](https://user-images.githubusercontent.com/50028950/145351505-45f83fe9-97a6-4d1d-b24f-4cfeb1d857b1.png)
+
+5. Next we will add another service to the docker compose file which represents the Web. 
+6. Right click the Web project and select Add-> Container Orchestration Support --> Select Docker Compose --> Select Linux as the OS. These steps are similar to step 1 we did for API project.
+7. Visual studio adds a Docker file for the Web project and also updates the Docker compose file to include the Web as another service. 
+8. Updated Docker Compose file & the Docker file for the Web project are as follows. 
+  ![image](https://user-images.githubusercontent.com/50028950/145352149-3fd17d78-09f1-4cd6-b4cf-915122c67fab.png)
+
+
+   ![image](https://user-images.githubusercontent.com/50028950/145351974-a71b072f-6d1c-4360-8a7a-98462a50259e.png)
+   
+ 9. Also observe that as soon as we add the docker compose VS 2019 has changed the Debug option to docker-compose.
+ 
+ ![image](https://user-images.githubusercontent.com/50028950/145351133-1a502780-27bf-40d3-92f7-534df9ba6d6c.png)
+ 
+
+
 
 
 
