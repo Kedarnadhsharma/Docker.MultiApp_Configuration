@@ -32,7 +32,6 @@ namespace Docker.MultiApp.Web.Pages
                 request.RequestUri = new Uri("http://localhost:31895/api/Book");
                 var response = await client.SendAsync(request);
                 var bookList = await response.Content.ReadAsStringAsync();
-                // var books = JsonConvert.DeserializeObject<IEnumerable<Book>>(bookList);
                 var details = JObject.Parse(bookList);
                 ViewData["Book"] = details["name"] + ";;" + details["author"] + ";;" + details["price"]+ ";;" + details["category"];
                // ViewData["Books"] = books;// books[0]["name"] + ";;" + books[0]["text"] + ";;" + books[0]["category"];

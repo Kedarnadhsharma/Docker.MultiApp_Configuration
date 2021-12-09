@@ -22,8 +22,8 @@ namespace Docker.MultiApp.API.Controllers
             return book;
         }
         
-        [HttpGet]
-        public List<Book> Repository()
+        
+        protected List<Book> Repository()
         {
             List<Book> BookList = new List<Book> {
                 new Book {Name = "Thinking Fast and Slow", Author = "Daniel Kanhneman", Category="Economics", Price=400 },
