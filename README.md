@@ -66,7 +66,28 @@ Now that our application is up and running we will add Docker Support for the ap
    
  9. Also observe that as soon as we add the docker compose VS 2019 has changed the Debug option to docker-compose.
  
- ![image](https://user-images.githubusercontent.com/50028950/145351133-1a502780-27bf-40d3-92f7-534df9ba6d6c.png)
+    ![image](https://user-images.githubusercontent.com/50028950/145351133-1a502780-27bf-40d3-92f7-534df9ba6d6c.png)
+ 
+ 10. I made a couple of changes to the Docker compose file to indicate the API to start first by using the depends_on and also added the port entries.
+  ![image](https://user-images.githubusercontent.com/50028950/145380500-9082d3a1-ef72-4a4d-9d1d-ebde4ccf0c62.png) 
+
+ 12. Lets run the docker compose build and docker compose up commands to see whether the App is working or not.
+  
+ 13. If you have Docker Desktop installed you can see both the containers up and running as below.
+ 
+   ![image](https://user-images.githubusercontent.com/50028950/145381959-39b4614f-56e9-47b1-95e3-4be1d8af70ae.png)
+
+
+  
+ 14. If you go to https:localhost:9000 you can see the same UI as before.
+ 
+     ![image](https://user-images.githubusercontent.com/50028950/145380733-6ea64d06-03b0-498c-baa8-b9468bf2df3c.png)
+    
+ So we have successfully containerized our application now. Next step is to add a database layer and get the data from DB, rather than a static list from Repository.
+ 
+ # Adding SQL Server to the Application and enhance Docker Compose to SQL Server  
+
+
  
 
 
