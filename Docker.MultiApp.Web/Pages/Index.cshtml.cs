@@ -29,7 +29,7 @@ namespace Docker.MultiApp.Web.Pages
                 var bookModel = new { Name = "", Author ="", Price = 0, Category="" };
                
                 var request = new System.Net.Http.HttpRequestMessage();
-                request.RequestUri = new Uri("http://localhost:31895/api/Book");
+                request.RequestUri = new Uri("http://docker.multiapp.api/api/Book");
                 var response = await client.SendAsync(request);
                 var bookList = await response.Content.ReadAsStringAsync();
                 var details = JObject.Parse(bookList);
