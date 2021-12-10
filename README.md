@@ -153,12 +153,12 @@ Now that our application is up and running we will add Docker Support for the ap
 
   12. Now if you open a browser and hit https://localhost:9000, you can see the API connecting to DB and getting the data.
   
-     ![image](https://user-images.githubusercontent.com/50028950/145576390-96f9727a-55d8-42cb-8231-1a5fd591ceee.png)
+      ![image](https://user-images.githubusercontent.com/50028950/145576390-96f9727a-55d8-42cb-8231-1a5fd591ceee.png)
 
      
    13. Finally, the UI will be displayed with a single book record selected randomly from the DB as below.
     
-     ![image](https://user-images.githubusercontent.com/50028950/145576432-7072bec6-1b7f-4a1c-8b2b-5fa0e69adbd3.png)
+        ![image](https://user-images.githubusercontent.com/50028950/145576432-7072bec6-1b7f-4a1c-8b2b-5fa0e69adbd3.png)
 
 
 
