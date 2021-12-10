@@ -87,7 +87,85 @@ Now that our application is up and running we will add Docker Support for the ap
  
  # Adding SQL Server to the Application and enhance Docker Compose to SQL Server  
 
+ We are going to run a SQL Server as a container and also create a database and some sample data as well. 
+ 
+ 1. Create a folder called Database and add the following Database_Setup.sql file as follow. This SQL file creates a database called DockerAppDB and creates a table called 
+    Book and inserts some data. 
+    
+    ![image](https://user-images.githubusercontent.com/50028950/145572375-edcea126-3b27-4459-9fc2-64f47f5d56c8.png)
 
+2. Add a docker file to create a SQL Server container from the SQL Server Ubuntu image and runs a few SQL commands to run the above SQL file once the server is ready.
+   ![image](https://user-images.githubusercontent.com/50028950/145572602-b1f07d19-529d-40d0-bc22-8937d6346b1b.png)
+   
+   import-data.sh
+   
+   ![image](https://user-images.githubusercontent.com/50028950/145572676-d5a3d93d-e4ad-4c6e-a15e-a4390c8adf5c.png)
+   
+   entrypoint.sh
+   
+   ![image](https://user-images.githubusercontent.com/50028950/145572744-9764226e-e5fb-4e4f-8c99-5847c1968da9.png)
+   
+   3. If you navigate to the Databasefolder under API project and build the Docker file, we can see the database created. We can connect to the same using sa and sapassword
+   
+   We can see the Books table with the sample data created using the Database_Setup.sql file.
+   
+   ![image](https://user-images.githubusercontent.com/50028950/145573299-f2ffa2da-a037-41c7-9ec4-7f7bc110ca90.png)
+
+
+ These steps will make our SQL Server ready with some sample data. Now we need to connect from our API project to this SQL Server container and get the data.
+ We will use EntityFrameworkCore to connect from API to the database.
+ 
+ 4. Add the following Nuget packages to the API project. 
+ 
+ ![image](https://user-images.githubusercontent.com/50028950/145573544-25c1e728-6fe7-4583-83b5-a134aab2c755.png)
+ 
+ 5. Create a DBContext class as below  
+
+  ![image](https://user-images.githubusercontent.com/50028950/145573625-854c4a2d-3dcc-4d72-aeb1-cfbaeeff7eda.png)
+  
+  6. Open the appsettings.json file and add the ConnectionStrings Settings with the sql server details
+  
+  ![image](https://user-images.githubusercontent.com/50028950/145573956-b84c6237-922c-49a9-908c-be7e311bd14f.png)
+  
+  7. Wire up the DBContext class as a service during the StartUp for the API.
+  
+  ![image](https://user-images.githubusercontent.com/50028950/145574146-5348536c-73af-4127-b2f1-6727b16c5903.png)
+
+ 8. These steps will ensure our API can call the SQL Server running in the container and get the data.
+ 
+ 9. Finally we need to update the docker-compose.yml file to add the SQL Server details as well. Add a dependency between the API and DB using depends_on 
+ 
+    ![image](https://user-images.githubusercontent.com/50028950/145574431-73aee737-e6ea-42e9-b7af-5ee43bdeba45.png)
+    
+  10. Change the API code to get the data from DB rather than the static list. (context is the DBContext class created earlier). 
+  
+       ![image](https://user-images.githubusercontent.com/50028950/145574827-cb1d52fa-1c6b-40bf-af0b-0a20b35ed632.png)
+ 
+    
+ 11. In the Docker compose these are the 3 services running
+      a. docker.multiapp.api - API project running in its own container
+      b. docker.multiapp.web - Web project running in its own container
+      c. dockermultiappdb    - SQL Server running in a seperate container.
+      
+  11. We can confirm the same by expanding the Docker compose in the Docker destop and validate all the 3 containers are up and running. 
+
+      ![image](https://user-images.githubusercontent.com/50028950/145574961-e9ae6fd2-266e-4639-aed4-b36cb47834ef.png)
+
+  12. Now if you open a browser and hit https://localhost:9000, you can see the API connecting to DB and getting the data.
+  
+     ![image](https://user-images.githubusercontent.com/50028950/145576390-96f9727a-55d8-42cb-8231-1a5fd591ceee.png)
+
+     
+   13. Finally, the UI will be displayed with a single book record selected randomly from the DB as below.
+    
+     ![image](https://user-images.githubusercontent.com/50028950/145576432-7072bec6-1b7f-4a1c-8b2b-5fa0e69adbd3.png)
+
+
+
+  
+
+
+ 
  
 
 
