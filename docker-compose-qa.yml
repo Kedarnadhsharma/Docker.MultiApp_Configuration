@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  docker.multiapp.api:
+    image: ${DOCKER_REGISTRY-}dockermultiappapi
+    build:
+      context: .
+      dockerfile: Docker.MultiApp.API/Dockerfile
+    depends_on:
+      - dockermultiappdb
+  docker.multiapp.web:
+    image: ${DOCKER_REGISTRY-}dockermultiappweb
+    build:
+      context: .
+      dockerfile: Docker.MultiApp.Web/Dockerfile
+    ports:
+      - "8001:80"
+    depends_on:
+      - docker.multiapp.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      
+  dockermultiappdb:    
+    build:      
+      context: ./Docker.MultiApp.API/Database 
+    environment:
+            SA_PASSWORD: "Database!2021"
+            ACCEPT_EULA: "Y"
+    ports: 
+      - "1434:1433"
